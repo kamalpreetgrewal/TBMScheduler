@@ -13,7 +13,7 @@ class InputField extends React.Component {
 			<label>
 				Shift {this.props.name}
 				<input type={this.props.type} onChange={this.props.onChange}
-				value={this.props.value} />
+				value={this.props.value} name={this.props.name} />
 			</label>
 		);
 	}
@@ -23,7 +23,7 @@ class ShiftForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			shiftDate: new Date(),
+			shiftDate: this.shiftDate,
 			shiftStation: '',
 			shiftStartTime: '',
 			shiftEndTime: '',
@@ -44,7 +44,7 @@ class ShiftForm extends React.Component {
 
 	handleChange(event) {
 		this.setState({
-		   	[event.target.name]: event.target.value
+			["shift" + event.target.name]: event.target.value
 		});
 	}
 
@@ -58,22 +58,23 @@ class ShiftForm extends React.Component {
 			shiftStartTime: this.state.shiftStartTime,
 			shiftEndTime: this.state.shiftEndTime,
 			shiftNumber: this.state.shiftNumber
-		})
+		});
 
 		this.setState({
 			shiftObj,
-			shiftDate: new Date(),
+			shiftDate: this.shiftDate,
 			shiftStation: '',
 			shiftStartTime: '',
 			shiftEndTime: '',
-			shiftNumber: ''
+			shiftNumber: '',
+			showShiftTable: true
 		});
 	}
 
 	render() {
 		return (
 		<div>
-			<form>
+			<form onSubmit={this.handleSubmit}>
 				<h2>Shift Details</h2>
 				<label>
 					Shift Date
@@ -83,16 +84,17 @@ class ShiftForm extends React.Component {
 					placeholderText="Click to select a date"
 				/>
 				</label><br/>
-				<InputField name="Station" type="text" onChange={this.handleChange}
-							value={this.props.shiftStation}/><br/>
-				<InputField name="Start Time" type="time" onChange={this.handleChange}
-							value={this.props.shiftStartTime}/><br/>
-				<InputField name="End Time" type="time" onChange={this.handleChange}
-							value={this.props.shiftEndTime}/><br/>
-				<InputField name="Number" type="number" onChange={this.handleChange}
-							value={this.props.shiftNumber}/><br/>
+				<InputField name="Number" type="number" value={this.state.shiftNumber}
+							onChange={this.handleChange}/><br/>
+				<InputField name="Station" type="text" value={this.state.shiftStation}
+							onChange={this.handleChange}/><br/>
+				<InputField name="StartTime" type="time" value={this.state.shiftStartTime}
+							onChange={this.handleChange}/><br/>
+				<InputField name="EndTime" type="time" value={this.state.shiftEndTime}
+							onChange={this.handleChange}/><br/>
 				<button type="submit" value="Submit">Add Shift</button>
 			</form>
+			{this.state.showShiftTable && <ShiftTable shiftObj={this.state.shiftObj}/>}
 			</div>
 		);
 	}

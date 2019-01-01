@@ -1,19 +1,17 @@
 import React, {Component} from 'react';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 class ShiftTable extends Component {
 	constructor(props) {
 		super(props);
-		console.log(this.props);
 	}
 	render() {
 		const shiftItems = this.props.shiftObj;
-		console.log("hello");
 		return(
-			<BootstrapTable data={ shiftItems } striped hover condensed>
+			<BootstrapTable data={ shiftItems }>
 				<TableHeaderColumn dataField='shiftNumber' isKey>Shift Number</TableHeaderColumn>
-        		<TableHeaderColumn dataField='shiftStartDate'>Shift Date - Day</TableHeaderColumn>
-        		
+        		<TableHeaderColumn dataField='shiftDate'>Shift Date - Day</TableHeaderColumn>
 			</BootstrapTable>
 		);
 	}
