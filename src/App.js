@@ -4,14 +4,10 @@ import ShiftTable from './ShiftTable';
 import 'react-datepicker/dist/react-datepicker.css';
 
 class InputField extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<label>
-				Shift {this.props.name}
+				{this.props.name}
 				<input type={this.props.type} onChange={this.props.onChange}
 				value={this.props.value} name={this.props.name} />
 			</label>
@@ -53,10 +49,12 @@ class ShiftForm extends React.Component {
 		let shiftObj = [...this.state.shiftObj]
 
 		shiftObj.push({
-			shiftDate: this.state.shiftDate,
+			shiftDate: this.state.shiftDate.toDateString(),
 			shiftStation: this.state.shiftStation,
-			shiftStartTime: this.state.shiftStartTime,
-			shiftEndTime: this.state.shiftEndTime,
+			shiftStartTime: Number(this.state.shiftStartTime.split(":")[0]) <= 11 ?
+							this.state.shiftStartTime + "-" + this.state.shiftEndTime : '',
+			shiftEndTime: Number(this.state.shiftStartTime.split(":")[0]) >= 12 ?
+							this.state.shiftStartTime + "-" + this.state.shiftEndTime : '',
 			shiftNumber: this.state.shiftNumber
 		});
 
