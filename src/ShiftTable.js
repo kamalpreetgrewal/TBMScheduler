@@ -7,11 +7,12 @@ class ShiftTable extends Component {
 	render() {
 		const shiftItems = this.props.shiftObj;
 		return(
-			<BootstrapTable data={ shiftItems }>
-				<TableHeaderColumn dataField='shiftNumber' isKey>Shift Number</TableHeaderColumn>
-        		<TableHeaderColumn dataField='shiftDate'>Shift Date - Day</TableHeaderColumn>
-        		<TableHeaderColumn dataField='shiftStartTime'>AM Shift</TableHeaderColumn>
-        		<TableHeaderColumn dataField='shiftEndTime'>PM Shift</TableHeaderColumn>
+			<BootstrapTable data={ shiftItems } striped condensed>
+			 	<TableHeaderColumn row='0'>Shift available at: {shiftItems[0].shiftStation}</TableHeaderColumn>
+				<TableHeaderColumn row='1' dataField='shiftNumber' isKey>Shift Number</TableHeaderColumn>
+        		<TableHeaderColumn row='1' dataField='shiftDate'>Shift Date - Day</TableHeaderColumn>
+        		<TableHeaderColumn row='1' dataField='shiftStartTime'>AM Shift</TableHeaderColumn>
+        		<TableHeaderColumn row='1' dataField='shiftEndTime'>PM Shift</TableHeaderColumn>
 			</BootstrapTable>
 		);
 	}

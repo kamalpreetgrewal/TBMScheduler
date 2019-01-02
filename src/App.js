@@ -91,6 +91,7 @@ class ShiftForm extends React.Component {
 				<InputField name="EndTime" type="time" value={this.state.shiftEndTime}
 							onChange={this.handleChange}/><br/>
 				<button type="submit" value="Submit">Add Shift</button>
+				<button>New Schedule</button>
 			</form>
 			{this.state.showShiftTable && <ShiftTable shiftObj={this.state.shiftObj}/>}
 			</div>
